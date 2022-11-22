@@ -1,0 +1,32 @@
+Шкода Кристины
+3 вариант
+1)
+select name from v$database; 
+
+2)
+select * from dba_profiles where profile = 'DEFAULT';
+
+3)
+select * from user_segments;
+
+4)
+select segment_name from dba_extents where owner= "user_name";
+
+5)
+select name from dba_pdbs;
+
+6)
+select * from v$log;
+
+7)
+select * from v$psfile_users;
+
+8)
+select name, value from v$sga;
+
+9)
+select component, granule_size from v$sga_dynamic_components where current_size > 0;
+
+10)
+select * from v$session;
+
