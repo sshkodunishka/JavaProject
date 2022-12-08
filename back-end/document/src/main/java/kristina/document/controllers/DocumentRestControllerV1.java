@@ -1,6 +1,7 @@
 package kristina.document.controllers;
 
 import kristina.document.dto.DocumentDTO;
+import kristina.document.exception.MyNotOwnerException;
 import kristina.document.models.Document;
 import kristina.document.models.User;
 import kristina.document.services.CommentService;
@@ -114,6 +115,11 @@ public class DocumentRestControllerV1 {
     public ResponseEntity deleteDocument(
             Principal principal,
             @PathVariable Long id) throws IOException {
+        User user = userService.findByUsername(principal.getName());
+        if(!user.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN")))
+        {
+           return ResponseEntity.status(403).build();
+        }
         documentService.deleteDoucmentById(id, principal.getName());
         return ResponseEntity.ok("Document delete successfully");
     }
